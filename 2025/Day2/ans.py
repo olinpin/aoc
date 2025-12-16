@@ -25,3 +25,26 @@ def part1():
                 res += int(num)
             firstId = str(int(half) + 1) * 2
     print(res)
+
+def part2():
+    res = 0
+    for sequence in input:
+        firstId = sequence.split("-")[0]
+        lastId = sequence.split("-")[1]
+        while int(firstId) <= int(lastId):
+            newFirstId = str(int(firstId) + 1)
+            if len(set(firstId)) == 1 and len(firstId) > 1:
+                res += int(firstId)
+                firstId = newFirstId
+                continue
+            firstLen = len(firstId)
+            for i in range(1, (firstLen // 2 + 1)):
+                subId = firstId[:i]
+                possibleId = subId * (firstLen // i)
+                if possibleId == firstId:
+                    res += int(possibleId)
+                    break
+            firstId = newFirstId
+    print(res)
+
+part2()
